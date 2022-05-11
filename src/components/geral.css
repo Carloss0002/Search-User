@@ -1,5 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap');
 
+h1{
+    font-size: 42px;
+    font-weight: bold;
+    font-family: 'Rubik', sans-serif;
+}
+h1 span{
+   font-style: italic;
+   font-weight: lighter;
+   font-family: 'Rubik', sans-serif;
+}
+
 h2{
     font-family: 'Rubik', sans-serif;
     font-size: 2.25em;
@@ -12,4 +23,17 @@ p{
 span{
     font-family: 'Rubik', sans-serif;
     font-size: 1.25em;
+}
+
+.form{
+    width: 700px;
+    height: 40px;
+    border-radius: 10px 0 0 10px;
+    outline: none;
+    border: 1px solid black;
+}
+.btnSearch{
+    height: 40px;
+    outline: none;
+    border-radius: 0 10px 10px 0;
 }

@@ -5,19 +5,43 @@
         <h2>{{user.name}}</h2>
         <p>{{user.login}}</p>
         <hr>
+
         <div class="d-flex flex-column">
-            <span>Compania: {{user.company}}</span>
-            <span>Localização: {{user.location}}</span>
-            <span>Seguidores: {{user.followers}}</span>
-            <span>Repositórios: {{user.public_repos}}</span>
+            <span><i class="fas fa-building"></i>  {{ user.company == null? `Sem informação`: user.company}}</span>
+            <span><i class="fas fa-map-marker-alt"></i>  {{ user.location == null? `Campo vazio`: user.location}}</span>
+            <span><i class="fas fa-user-friends"></i>  {{ user.followers }}</span>
+            <span><i class="fas fa-archive"></i>  {{ user.public_repos}}</span>
+            <span v-if="elemento"><i class="fas fa-star"></i>  {{ star.data.length }}</span>
             
         </div>
     </div>
 </template>
 
 <script>
+import api from '../services/api'
 export default {
-    props:['user']
+    props:['user', 'login', 'chaves'],
+    data(){
+        return{
+            star: null,
+            elemento: false
+        }
+    },
+   async created(){
+     const {client_id, client_secret} = this.chaves
+
+     console.log(client_id)
+     console.log(client_secret)
+     console.log(this.login)
+
+      const favorites = await api.get(`${this.login}/starred?client_id${client_id}&client_secret${client_secret}`)  
+
+      this.star = favorites
+
+      console.log(this.star)
+
+      this.elemento = true
+    }
 }
 </script>
 
@@ -29,6 +53,6 @@ export default {
   }
   img{
     border-radius: 2px;
-    filter: drop-shadow(0 0 0.75rem rgba(87, 86, 86, 0.801));
+    filter: drop-shadow(0 0 0.73rem rgba(87, 86, 86, 0.801));
   }
 </style>
