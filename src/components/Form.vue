@@ -19,8 +19,8 @@
 
 
     <div v-if="body">
-       <div class="d-flex flex-md-row justify-content-around" id="elemento">
-            <div class="col-md-3">
+       <div class="d-flex flex-md-row flex-wrap justify-content-around" id="elemento">
+            <div class="col-md-3 ">
              <User :user="user" :login="userName" :chaves="gitApi"/>
             </div>
           
@@ -134,6 +134,4 @@ export default{
        margin-top: -25px; 
        left: 20%;
   }
-  
-
 </style>

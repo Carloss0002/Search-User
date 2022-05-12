@@ -47,10 +47,11 @@ export default {
  @import './geral.css';
   #User{
      height: 589px;
-     width: 300;
+     width: 300px;
   }
   img{
     border-radius: 2px;
     filter: drop-shadow(0 0 0.73rem rgba(87, 86, 86, 0.801));
   }
+
 </style>

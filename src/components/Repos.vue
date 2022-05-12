@@ -44,7 +44,7 @@
              arr.filter(()=>{
               return(arr.id !== id)
              })
-             localStorage.removeItem(arr.id)
+             localStorage.removeItem(arr)
              
              localStorage.setItem('myList', JSON.stringify(arr))
             //  alert('Já foi salvo');
@@ -52,6 +52,7 @@
            }  
            this.favorites = true
            salvos.push(this.repo)
+           
            localStorage.setItem('myList', JSON.stringify(salvos))
       }
     },
