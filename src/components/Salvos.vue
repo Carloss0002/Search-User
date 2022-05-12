@@ -3,7 +3,6 @@
       <header>
          <div class="d-flex justify-content-between align-itens-center">
           <h1>Repositórios Favoritos</h1>
-          <router-link to="/">Voltar para Home</router-link>
          </div> 
       </header> 
       <h2>Salvos</h2>
@@ -33,10 +32,14 @@
 </template>
 
 <script>
+
 export default {
+   
    data(){
        return{
-           salvos: []
+           salvos: [],
+           elementos: true,
+           error: [1]
        }
    },
      methods:{

@@ -9,7 +9,7 @@
           <p> {{repo.description===null? `repositório sem descrição : )`: repo.description}}</p>
           <a :href="repo.html_url">Link repositório</a><br>
           <div class="mt-3">
-           <button class="btn" @click="salvar"> <i class="far fa-star fa-2x"></i></button> <span>{{repo.stargazers_count}}</span>
+           <button class="btn" :class="{ 'star':favorites == false, 'starred': favorites == true}" @click="salvar"></button><span>{{favorites == false? repo.stargazers_count:repo.stargazers_count+1 }}</span>
           </div>
         </div>  
       </div>  
@@ -19,29 +19,54 @@
 <script>
  export default{
     props:['repo'],
+    data(){
+      return{
+        favorites: false,
+        
+      }
+    },
     methods:{
       salvar(){
-         const minhaLista= localStorage.getItem('myList')
-
-         let salvos = JSON.parse(minhaLista) || []
-
-         const hasList = salvos.some( (repo) => repo.id === this.repo.id);
-
-         if(hasList){
-           alert('Já foi salvo');
-           return;
+        
+           const minhaLista= localStorage.getItem('myList')
+  
+           let salvos = JSON.parse(minhaLista) || []
+  
+           const hasList = salvos.some( (repo) => repo.id === this.repo.id);
            
-         }
-
-         salvos.push(this.repo)
-         localStorage.setItem('myList', JSON.stringify(salvos))
+           
+           if(hasList){
+             alert('Já foi salvo');
+             return;
+             
+           }  
+           this.favorites = true
+           salvos.push(this.repo)
+           localStorage.setItem('myList', JSON.stringify(salvos))
       }
-    }
+    },
+    created(){
+       const meusFavoritos = localStorage.getItem('myList')
+
+       let favoritos = JSON.parse(meusFavoritos) || []
+
+       const star = favoritos.some( (repo) => repo.id === this.repo.id);
+
+       if(star){
+        return this.favorites = true   
+       }
+    },
  }
 </script>
 
 <style scoped>
  .repositorios{
    border: 1px solid black; 
+ }
+ .star{
+   background: url(./stars/star.svg) no-repeat center;
+ }
+ .starred{
+   background: url(./stars/star-fill.svg) no-repeat center;
  }
 </style>

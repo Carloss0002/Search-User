@@ -10,15 +10,15 @@
                      <button class="btn btnSearch btn-dark"  @click="searchUser" >Buscar</button>
                </div>  
 
-               <router-link class="btn" :class="{'d-none':elementos==false}" to="/salvos" >
+               <button class="btn" :class="{'d-none':elementos==false}" @click="salva">
                   Ver Favoritos
-               </router-link>
+               </button>
             </div>
          </div>        
       </header>
 
 
-    <div v-if="elementos">
+    <div v-if="body">
        <div class="d-flex flex-md-row justify-content-around" id="elemento">
             <div class="col-md-3">
              <User :user="user" :login="userName" :chaves="gitApi"/>
@@ -34,11 +34,16 @@
            
        </div> 
     </div>
+    
         <article v-if="error[0] === 1">
             <div class="d-flex flex-column">
                <Error v-if="error[0] === 1" :erro="error" :name="userName" />
             </div>  
-         </article>  
+         </article>
+
+         <div v-if="salvos">
+            <Salvos/>
+         </div>  
       
       
    </div>
@@ -49,15 +54,19 @@ import User from './User.vue'
 import api from '../services/api'
 import Repos from './Repos.vue'
 import Error from './Error.vue'
+import Salvos from './Salvos.vue'
 
 
 export default{
-  components: { User, Repos, Error},
+  components: { User, Repos, Error, Salvos},
+    
     data(){
         return{
             userName: '',
             campoVazio: 'User name',
             elementos: false,
+            body: false,
+            salvos: false,
             error: [0, ],
              gitApi:{  
                client_id: 'ec71f1aff043abc474b7',
@@ -81,7 +90,7 @@ export default{
                 api.get(
                   `${this.userName}?client_id${client_id}&client_secret${client_secret}`
                 )
-               .then(({data})=>this.user=data, this.elementos= true)
+               .then(({data})=>this.user=data, this.elementos= true, this.body=true, this.salvos=false)
                
                
                api.get(`${this.userName}/repos?per_page=${count}&sort=${sort}{&client_id=${client_id}&client_secret=${client_secret}}`)
@@ -92,14 +101,15 @@ export default{
                   this.elementos = false
                   this.error[0] = 1
                   this.error.push(error)
-                  // alert( `<div><p>Usuario não encontrado, por favor, verifique o nome do usuario <span class="nome_usuario">${this.userName}</span> está correto e tente novamente.</p>  <p>${error}</p></div>`)
-                  
                });
-             }
-            
-          
-           
+             }  
         },
+        
+        salva(){
+           this.body = false
+           this.salvos = true
+           this.elementos = true
+        }
        
     }
 }

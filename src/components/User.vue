@@ -30,15 +30,13 @@ export default {
    async created(){
      const {client_id, client_secret} = this.chaves
 
-     console.log(client_id)
-     console.log(client_secret)
-     console.log(this.login)
+    
 
       const favorites = await api.get(`${this.login}/starred?client_id${client_id}&client_secret${client_secret}`)  
 
       this.star = favorites
 
-      console.log(this.star)
+      
 
       this.elemento = true
     }

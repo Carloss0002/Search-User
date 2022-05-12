@@ -1,9 +1,6 @@
 <template>
   <div id="app">
-     <Form v-if="0"/>
-      <div>
-        <router-view></router-view>
-      </div>
+     <Form/>
   </div>
 </template>
 
