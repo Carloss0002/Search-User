@@ -37,3 +37,12 @@ span{
     outline: none;
     border-radius: 0 10px 10px 0;
 }
+@media (max-width: 992px) {
+    .form{
+        width: 200px;
+    }
+    .forMd{
+        display: flex;
+        flex-direction: column;
+    }
+}

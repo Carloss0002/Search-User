@@ -2,7 +2,7 @@
    <div>
       <header class="mb-5"> 
          <div :class="{'formulario':elementos==false&&error[0] === 0, '':error[0]===1}">
-            <div :class="{'d-flex align-items-center justify-content-around':elementos||error[0]===1}">
+            <div :class="{'d-flex align-items-center justify-content-around forMd':elementos||error[0]===1}">
                <h1>Github <span>Search</span></h1>
 
                <div class="ml-5 d-flex align-items-center">

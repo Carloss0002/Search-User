@@ -51,7 +51,7 @@ export default {
   }
   img{
     border-radius: 2px;
-    filter: drop-shadow(0 0 0.73rem rgba(87, 86, 86, 0.801));
+    filter: drop-shadow(0 0 0.73rem rgba(87, 86, 86, 0.801)); 
   }
 
 </style>
