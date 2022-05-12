@@ -9,7 +9,7 @@
           <p> {{repo.description===null? `repositório sem descrição : )`: repo.description}}</p>
           <a :href="repo.html_url">Link repositório</a><br>
           <div class="mt-3">
-           <button class="btn" :class="{ 'star':favorites == false, 'starred': favorites == true}" @click="salvar"></button><span>{{favorites == false? repo.stargazers_count:repo.stargazers_count+1 }}</span>
+           <button class="btn" :class="{ 'star':favorites == false, 'starred': favorites == true}" @click="salvar(repo.id)"></button><span>{{favorites == false? repo.stargazers_count:repo.stargazers_count+1 }}</span>
           </div>
         </div>  
       </div>  
@@ -26,7 +26,7 @@
       }
     },
     methods:{
-      salvar(){
+      salvar(id){
         
            const minhaLista= localStorage.getItem('myList')
   
@@ -36,9 +36,19 @@
            
            
            if(hasList){
-             alert('Já foi salvo');
-             return;
+             this.favorites = false
+             let fav = localStorage.getItem('myList')
+             var arr = []
+
+             arr.push(fav)
+             arr.filter(()=>{
+              return(arr.id !== id)
+             })
+             localStorage.removeItem(arr.id)
              
+             localStorage.setItem('myList', JSON.stringify(arr))
+            //  alert('Já foi salvo');
+             return;
            }  
            this.favorites = true
            salvos.push(this.repo)

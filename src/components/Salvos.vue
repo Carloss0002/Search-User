@@ -18,7 +18,7 @@
        <div class="favoritos ml-5">
          <div class="repositorios mb-2 mt-5" v-for="favorito in salvos" :key="favorito.id">
             <h2>{{favorito.name}}</h2> 
-            <h3 class="float-right mx-0">{{favorito.owner.login}}</h3>
+            
             <p> {{favorito.description===null? `repositório sem descrição : )`: favorito.description}}</p>
             <a :href="favorito.html_url">Link repositório</a><br>
             <div>
